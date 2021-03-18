@@ -1,3 +1,13 @@
+mat-form-field input {
+    border: none;
+    height: initial !important;
+    margin: 0;
+  }
+  mat-form-field input:focus {
+    border: none !important;
+    box-shadow: none !important;
+    height: initial !important;
+  }
 .uploadZone{
     width: 450px;
     height: 250px;
@@ -5,6 +15,11 @@
     text-align: center;
     border: dashed 1px #979797;
     position: relative;
+    margin: auto;
+}
+.imagePreview{
+    width: 400px;
+    height: 400px;
     margin: auto;
 }
 #fileUploadRef{

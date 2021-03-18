@@ -1,8 +1,32 @@
 <div class="container valign-wrapper" style="height: 100%;">
-    <div class="uploadZone">
-        <input type="file" #fileUploadRef id="fileUploadRef">
+    <div class="uploadZone" *ngIf="!imageSelected">
+        <input type="file" #fileUploadRef id="fileUploadRef" (change)="processFile(fileUploadRef)">
         <img src="./assets/ic-upload-file.svg">
         <h3>Upload the image</h3>
         <label for="fileUploadRef">Browse Image</label>
     </div>
+    <div *ngIf="imageSelected" style="margin: auto;">
+        <div style="padding-bottom: 40px;">
+            <img src="{{imageURL}}" height="300px" width="300px" [ngStyle]="{'transform':'rotate(' + rotateValue*0.01745 + 'rad)'}">
+        </div>
+        <div>
+            <mat-card style="padding:0 10px; width: min-content;">
+                <mat-card-content>
+                  <h2>Rotate the Image</h2>
+                  <mat-form-field appearance="standard">
+                    <mat-label>Value</mat-label>
+                    <input matInput type="text" [(ngModel)]="rotateValue">
+                  </mat-form-field>
+                  <mat-slider
+                    thumbLabel
+                    min="0"
+                    max="359"
+                    [displayWith]="formatLabel"
+                    [(ngModel)]="rotateValue" style="width:100%;">
+                  </mat-slider>
+                </mat-card-content>
+              </mat-card>
+        </div>
+    </div>
+
 </div>

@@ -32,12 +32,12 @@
             ],
             "styles": [
               "./node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css",
-              "node_modules/materialize-css/dist/css/materialize.min.css",
+              "node_modules/materialize-css/dist/css/materialize.css",
               "src/styles.css"
             ],
             "scripts": [
               "node_modules/jquery/dist/jquery.min.js",
-              "node_modules/materialize-css/dist/js/materialize.min.js"
+              "node_modules/materialize-css/dist/js/materialize.js"
             ]
           },
           "configurations": {
@@ -73,7 +73,8 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "bosch-interiit:build"
+            "browserTarget": "bosch-interiit:build",
+            "disableHostCheck": true
           },
           "configurations": {
             "production": {
