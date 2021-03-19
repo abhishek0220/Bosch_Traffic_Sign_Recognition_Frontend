@@ -9,24 +9,36 @@
         <div style="padding-bottom: 40px;">
             <img src="{{imageURL}}" height="300px" width="300px" [ngStyle]="{'transform':'rotate(' + rotateValue*0.01745 + 'rad)'}">
         </div>
-        <div>
-            <mat-card style="padding:0 10px; width: min-content;">
-                <mat-card-content>
-                  <h2>Rotate the Image</h2>
-                  <mat-form-field appearance="standard">
-                    <mat-label>Value</mat-label>
-                    <input matInput type="text" [(ngModel)]="rotateValue">
-                  </mat-form-field>
-                  <mat-slider
-                    thumbLabel
-                    min="0"
-                    max="359"
-                    [displayWith]="formatLabel"
-                    [(ngModel)]="rotateValue" style="width:100%;">
-                  </mat-slider>
-                </mat-card-content>
-              </mat-card>
-        </div>
+    </div>
+    <div *ngIf="imageSelected" style="position: fixed; right: 10px; width: 200px;">
+      <div style="margin-bottom: 10px;">
+        <h4>Resize the Image</h4>
+        <form [formGroup]="imageSize">
+          <mat-form-field appearance="standard">
+            <mat-label>Vertical(in px)</mat-label>
+            <input matInput type="text" formControlName="vert">
+          </mat-form-field>
+          <mat-form-field appearance="standard">
+            <mat-label>Horizontal(in px)</mat-label>
+            <input matInput type="text" formControlName="horz">
+          </mat-form-field>
+          <a class="btn green accent-3" mat-raised-button style="width: 100px;" (click)="changeSize()">Resize</a>
+        </form>
+      </div>
+      <div>
+        <h4>Rotate the Image</h4>
+        <mat-form-field appearance="standard">
+          <mat-label>Value</mat-label>
+          <input matInput type="text" [(ngModel)]="rotateValue">
+        </mat-form-field>
+        <mat-slider
+          thumbLabel
+          min="0"
+          max="359"
+          [displayWith]="formatLabel"
+          [(ngModel)]="rotateValue" style="width:100%;">
+        </mat-slider>
+      </div>
     </div>
 
 </div>

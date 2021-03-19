@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 
 @Component({
   selector: 'app-add-image',
@@ -10,30 +11,72 @@ export class AddImageComponent implements OnInit {
 
   imageSelected:boolean;
   imageURL:string;
+  orgimageURL: string;
   imageWidth: number = 0;
   imageHeight: number = 0;
 
   rotateValue = 0;
-
+  imageSize: FormGroup;
   
 
-  constructor(){
+  constructor(
+    public fb: FormBuilder
+  ){
     this.imageSelected = false;
     this.imageURL = "";
+    this.orgimageURL = "";
+    this.imageSize = this.fb.group({
+      vert: ['', [Validators.required, Validators.pattern('^[0-9]+$')]],
+      horz: ['', [Validators.required, Validators.pattern('^[0-9]+$')]],
+    })
   }
 
   ngOnInit(): void {
+    
   }
 
   formatLabel(value: number) {
     return value;
   }
-
+  async changeSize(){
+    if(!this.imageSize.valid){
+      console.log("invalid")
+      return false;
+    }
+    else{
+      this.compressImage(this.imageSize.controls['vert'].value,this.imageSize.controls['horz'].value).then((compressed : any) => {
+        console.log(compressed.length);
+        this.imageURL = compressed;
+      })
+    }
+    return;
+  }
+  compressImage(newX : number, newY : number ) {
+    return new Promise((res : any, rej) => {
+      console.log(newX, newY, "-------------")
+      const img = new Image();
+      img.src = this.orgimageURL;
+      img.onload = () => {
+        const elem = document.createElement('canvas');
+        elem.width = newX;
+        elem.height = newY;
+        const ctx = elem.getContext('2d');
+        if(ctx != null){
+          ctx.drawImage(img, 0, 0, newX, newY);
+          const data = ctx.canvas.toDataURL();
+          res(data);
+        }
+        else res("sd");
+      }
+      img.onerror = error => rej(error);
+    })
+  }
   processFile(imageInput: any) {
     const file: File = imageInput.files[0];
     const reader = new FileReader();
     reader.addEventListener('load', (event: any) => {
       this.imageURL = event.target.result;
+      this.orgimageURL = event.target.result;
       var img = new Image();
       img.onload = () => {
           this.imageWidth = img.width;
