@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
+import { ImageCroppedEvent } from 'ngx-image-cropper';
+import { ActivatedRoute, Router } from "@angular/router";
 
 @Component({
   selector: 'app-add-image',
@@ -9,20 +11,21 @@ import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 
 export class AddImageComponent implements OnInit {
 
-  imageSelected:boolean;
+  imageSelected:boolean = false;
+  imageToCrop: boolean = false;
+  imageToUpload: boolean = true;;
   imageURL:string;
   orgimageURL: string;
-  imageWidth: number = 0;
-  imageHeight: number = 0;
 
   rotateValue = 0;
   imageSize: FormGroup;
   
 
   constructor(
-    public fb: FormBuilder
+    public fb: FormBuilder,
+    private activatedRoute: ActivatedRoute,
   ){
-    this.imageSelected = false;
+    
     this.imageURL = "";
     this.orgimageURL = "";
     this.imageSize = this.fb.group({
@@ -31,7 +34,12 @@ export class AddImageComponent implements OnInit {
     })
   }
 
-  ngOnInit(): void {
+  ngOnInit(): void {  
+    this.activatedRoute.params.subscribe(params => {
+      this.imageSelected = false;
+      this.imageToCrop = false;
+      this.imageToUpload = true;
+    });
     
   }
 
@@ -79,14 +87,32 @@ export class AddImageComponent implements OnInit {
       this.orgimageURL = event.target.result;
       var img = new Image();
       img.onload = () => {
-          this.imageWidth = img.width;
-          this.imageHeight = img.height;
           this.imageSelected = true;
           //this.setHandW();
       };
       img.src = this.imageURL;
     });
     reader.readAsDataURL(file);
+  }
+
+  imageChangedEvent: any = '';
+  croppedImage: any = '';
+
+  fileChangeEvent(event: any): void {
+    this.imageToUpload = false;
+    this.imageToCrop = true;
+    this.imageChangedEvent = event;
+  }
+
+  imageCropped(event: ImageCroppedEvent) {
+      this.croppedImage = event.base64;
+  }
+
+  imageCroppedFinal(){
+    this.imageToCrop = false;
+    this.imageSelected = true;
+    this.imageURL = this.croppedImage;
+    this.orgimageURL = this.croppedImage;
   }
 
 }

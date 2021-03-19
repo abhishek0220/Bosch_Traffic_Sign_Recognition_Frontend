@@ -1,6 +1,6 @@
 <div class="container valign-wrapper" style="height: 100%;">
-    <div class="uploadZone" *ngIf="!imageSelected">
-        <input type="file" #fileUploadRef id="fileUploadRef" (change)="processFile(fileUploadRef)">
+    <div class="uploadZone" *ngIf="imageToUpload">
+        <input type="file" #fileUploadRef id="fileUploadRef" (change)="fileChangeEvent($event)">
         <img src="./assets/ic-upload-file.svg">
         <h3>Upload the image</h3>
         <label for="fileUploadRef">Browse Image</label>
@@ -40,5 +40,27 @@
         </mat-slider>
       </div>
     </div>
-
+    <div class="card" *ngIf="imageToCrop" style="padding: 20px;">
+      <h3>Crop the Image</h3>
+      <div class="row" style="margin-top: 15px;">
+        <div class="text-center col m8">
+            <h5>Crop Image</h5>
+            <image-cropper 
+            [imageChangedEvent]="imageChangedEvent" 
+            [maintainAspectRatio]="true" 
+            [aspectRatio]="4 / 4"
+            [resizeToWidth]="200" 
+            format="png" 
+            (imageCropped)="imageCropped($event)"></image-cropper>
+        </div>
+        <div class="text-center col m4">
+            <h5>Preview</h5>
+            <img [src]="croppedImage" />
+        </div>
+        <div class="row center">
+          <a class="btn green accent-3" mat-raised-button style="width: 100px;" (click)="imageCroppedFinal()">Crop It</a>
+        </div>
+      </div>
+      
+    </div>
 </div>
