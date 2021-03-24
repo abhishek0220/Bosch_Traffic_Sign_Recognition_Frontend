@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { ImageCroppedEvent } from 'ngx-image-cropper';
 import { ActivatedRoute, Router } from "@angular/router";
+import { environment } from 'src/environments/environment';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Component({
   selector: 'app-add-image',
@@ -11,12 +13,15 @@ import { ActivatedRoute, Router } from "@angular/router";
 
 export class AddImageComponent implements OnInit {
 
+  serverURL:string;
+
   imageSelected:boolean = false;
   imageToCrop: boolean = false;
   imageToUpload: boolean = true;;
   imageURL:string;
   orgimageURL: string;
-
+  selected = '1';
+  classes : any[] = [];
   rotateValue = 0;
   imageSize: FormGroup;
   
@@ -24,14 +29,17 @@ export class AddImageComponent implements OnInit {
   constructor(
     public fb: FormBuilder,
     private activatedRoute: ActivatedRoute,
+    private http: HttpClient,
+    private router: Router
   ){
-    
+    this.serverURL = environment.serverUrl;
     this.imageURL = "";
     this.orgimageURL = "";
     this.imageSize = this.fb.group({
       vert: ['', [Validators.required, Validators.pattern('^[0-9]+$')]],
       horz: ['', [Validators.required, Validators.pattern('^[0-9]+$')]],
     })
+    console.log(this.serverURL);
   }
 
   ngOnInit(): void {  
@@ -40,7 +48,27 @@ export class AddImageComponent implements OnInit {
       this.imageToCrop = false;
       this.imageToUpload = true;
     });
-    
+    this.getAllClasses();
+  }
+  getAllClasses(){
+    this.http.get(this.serverURL + '/allClasses').subscribe((response : any)=>{
+      for(var i in response['classes']){
+        this.classes.push(response['classes'][i])
+      }
+    },error=>{
+      console.log('error')
+    })
+  }
+  sendIMG(){
+    this.http.post(this.serverURL + '/sendImage', {
+      'imageb64':this.imageURL,
+      'rotation' : this.rotateValue,
+      'class' : this.selected
+    }).subscribe((response : any) => {
+      this.router.navigateByUrl('/', {skipLocationChange: true}).then(()=> this.router.navigate(['/addImage']));
+    },error=>{
+      console.log('error')
+    })
   }
 
   formatLabel(value: number) {

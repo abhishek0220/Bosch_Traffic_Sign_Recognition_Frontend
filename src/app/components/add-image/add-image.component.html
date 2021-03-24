@@ -9,7 +9,17 @@
         <div style="padding-bottom: 40px;">
             <img src="{{imageURL}}" height="300px" width="300px" [ngStyle]="{'transform':'rotate(' + rotateValue*0.01745 + 'rad)'}">
         </div>
+        <div style="text-align: center;">
+          <mat-form-field appearance="fill" style="width: 100%;">
+            <mat-label>Select class</mat-label>
+            <mat-select [(value)]="selected">
+              <mat-option  *ngFor="let item of classes; let i = index" value="{{i+1}}">{{i+1}}. {{item}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <a class="btn" (click)="sendIMG()">Send Image</a>
+        </div>
     </div>
+    
     <div *ngIf="imageSelected" style="position: fixed; right: 10px; width: 200px;">
       <div style="margin-bottom: 10px;">
         <h4>Resize the Image</h4>
