@@ -37,7 +37,8 @@
             ],
             "scripts": [
               "node_modules/jquery/dist/jquery.min.js",
-              "node_modules/materialize-css/dist/js/materialize.js"
+              "node_modules/materialize-css/dist/js/materialize.js",
+              "src/assets/canvasjs.stock.min.js"
             ]
           },
           "configurations": {

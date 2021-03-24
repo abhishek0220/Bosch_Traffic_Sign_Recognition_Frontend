@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient} from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 
+declare const CanvasJS: any;
+
 @Component({
   selector: 'app-metrics',
   templateUrl: './metrics.component.html',
@@ -14,18 +16,30 @@ export class MetricsComponent implements OnInit {
     private http: HttpClient,
   ) {
     this.serverURL = environment.serverUrl;
-    this.getAllClasses()
+    //this.imgPCF = this.serverURL + '/graphPCF';
   }
 
   ngOnInit(): void {
+    this.makeGraph('/graphPCF', 'graphPCF')
+    this.makeGraph('/graphPCF', 'graph2')
   }
-  getAllClasses(){
-    this.http.get(this.serverURL + '/graphPCF').subscribe((response : any)=>{
-      this.imgPCF = response['imgLink']
-      console.log(response)
+
+  async makeGraph(endpoint: string, canvasID : string){
+    this.http.get(this.serverURL + endpoint).subscribe((response : any)=>{
+      let chart = new CanvasJS.Chart(canvasID, {
+        animationEnabled: true,
+        exportEnabled: true,
+        title: {
+          text: response['title']
+        },
+        data: [{
+          type: "column",
+          dataPoints: response['coords']
+        }]
+      });
+      chart.render();
     },error=>{
       console.log('error')
     })
   }
-
 }
