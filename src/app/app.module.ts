@@ -14,12 +14,14 @@ import { MatSliderModule } from '@angular/material/slider';
 import { MatSelectModule } from '@angular/material/select';
 import { ImageCropperModule } from 'ngx-image-cropper';
 import { MetricsComponent } from './components/metrics/metrics.component';
+import { VisualiserComponent } from './components/visualiser/visualiser.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     AddImageComponent,
-    MetricsComponent
+    MetricsComponent,
+    VisualiserComponent
   ],
   imports: [
     BrowserModule,

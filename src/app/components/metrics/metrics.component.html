@@ -1,7 +1,21 @@
 <div class="container" style="height: 100vh;">
     <div class="row" style="height: 50%; margin: 0;" >
-        <div class="col s6 valign-wrapper" style="height: 100%">
+        <div class="col s6 valign-wrapper" style="height: 100%; position: relative;">
             <img src="{{imgPCF}}" width="100%" alt="" srcset="">
+            <div *ngIf="imgPCF == ''"  id="loader" style=" height: 100%; width: 100%; position: absolute; z-index:10001">
+                <div class="valign-wrapper" style="height: 100%; width: 100%; position: absolute;">
+                    <div class="load" style="height: 100px; width: 100px; margin: 0 auto; "></div>
+                </div>
+                <div class="valign-wrapper" style="height: 100%; width: 100%; position: absolute;">
+                    <div class="load2" style="height: 90px; width: 90px; margin: 0 auto; "></div>
+                </div>
+                <div class="valign-wrapper" style="height: 100%; width: 100%; position: absolute;">
+                    <div class="load3" style="height: 80px; width: 80px; margin: 0 auto; "></div>
+                </div>
+                <div class="valign-wrapper" style="height: 100%; width: 100%; position: absolute;">
+                    <div class="load4" style="height: 70px; width: 70px; margin: 0 auto; "></div>
+                </div>
+            </div>
         </div>
         <div class="col s6 valign-wrapper" style="height: 100%">
             <img src="{{imgPCF}}" width="100%" alt="" srcset="">

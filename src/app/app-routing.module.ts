@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AddImageComponent } from './components/add-image/add-image.component';
 import { MetricsComponent } from './components/metrics/metrics.component';
+import { VisualiserComponent } from './components/visualiser/visualiser.component';
 
 const routes: Routes = [
   {
@@ -15,6 +16,10 @@ const routes: Routes = [
   {
     path:'metrics',
     component: MetricsComponent
+  },
+  {
+    path:'visual',
+    component: VisualiserComponent
   },
 ];
 
