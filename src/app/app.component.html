@@ -1,19 +1,22 @@
-<div class="valign-wrapper white-text" style="height: 100%; width: 150px; position: fixed; top: 0;">
+<div class="valign-wrapper white-text" style="height: 100%; width: 180px; position: fixed; top: 0;">
     <div style="width: 100%;">
+        <div class="black valign-wrapper triNavChild hover-cursor" (click)="redirectTo('/')">
+            <i class="material-icons">home</i><h3 style="margin:0;">Home </h3>
+        </div>
         <div class="pink valign-wrapper triNavChild hover-cursor" (click)="redirectTo('/addImage')">
-            <h3 style="margin:0;">Add Image</h3>
+            <i class="material-icons">library_add</i><h3 style="margin:0;">Add Image</h3>
         </div>
         <div class="blue valign-wrapper triNavChild hover-cursor" (click)="redirectTo('/metrics')">
-            <h3 style="margin:0;">Metrics</h3>
+            <i class="material-icons">pie_chart</i><h3 style="margin:0;">Metrics</h3>
         </div>
         <div class="green valign-wrapper triNavChild hover-cursor" (click)="redirectTo('/visual')">
-            <h3 style="margin:0;">Visualiser</h3>
+            <i class="material-icons">landscape</i><h3 style="margin:0;">Visualiser</h3>
         </div>
         <div class="purple valign-wrapper triNavChild hover-cursor" (click)="redirectTo('/misclassified')">
-            <h3 style="margin:0;">Misclassified</h3>
+            <i class="material-icons">layers_clear</i><h3 style="margin:0;">Misclassified</h3>
         </div>
         <div class="orange valign-wrapper triNavChild hover-cursor" (click)="redirectTo('/report')">
-            <h3 style="margin:0;">Class Report</h3>
+            <i class="material-icons">receipt</i><h3 style="margin:0;">Class Report</h3>
         </div>
     </div>
 </div>

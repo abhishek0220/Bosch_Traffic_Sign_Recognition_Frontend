@@ -1,3 +1,6 @@
+<div style="position: fixed; top: 10px; left: 20px; width: 150px;">
+  <h1>Visualiser</h1>
+</div>
 <div class="container valign-wrapper" style="height:100%">
     <div style="width: 60vh; margin: auto; height: 70vh; position: relative;" >
         <img src="{{imgLink}}" width="100%">
@@ -12,7 +15,7 @@
                 <mat-option  *ngFor="let item of classes; let i = index" value="{{i+1}}">{{i+1}}. {{item}}</mat-option>
               </mat-select>
             </mat-form-field>
-            <a class="btn" style="margin-left: 30px;" (click)="getGrid()">Send Image</a>
+            <a class="btn" style="margin-left: 30px;" (click)="getGrid()">Get Dataset</a>
         </div>
     </div>
 </div>

@@ -18,6 +18,7 @@ import { VisualiserComponent } from './components/visualiser/visualiser.componen
 import { MisclassifiedComponent } from './components/misclassified/misclassified.component';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { ReportComponent } from './components/report/report.component';
+import { HomeComponent } from './components/home/home.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { ReportComponent } from './components/report/report.component';
     VisualiserComponent,
     MisclassifiedComponent,
     ReportComponent,
+    HomeComponent,
   ],
   imports: [
     BrowserModule,

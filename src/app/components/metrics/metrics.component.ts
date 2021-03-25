@@ -23,6 +23,35 @@ export class MetricsComponent implements OnInit {
     //this.makeGraph('/graphPCF', 'graphPCF')
     //this.makeGraph('/graphPCF', 'graph2')
     this.getHistory();
+    this.makeAccGraph();
+  }
+  makeAccGraph(){
+    this.http.get(this.serverURL + '/static/accuracy.json').subscribe((response : any)=>{
+      var acc = parseFloat(response['accuracy']);
+      var rem = 1 - acc;
+      let chart = new CanvasJS.Chart("graphAcc", {
+        theme: "light2",
+        animationEnabled: true,
+        exportEnabled: true,
+        title:{
+          text: "Accuracy"
+        },
+        data: [{
+          type: "pie",
+          showInLegend: true,
+          toolTipContent: "<b>{name}</b>: {y} (#percent%)",
+          indexLabel: "{name} - #percent%",
+          dataPoints: [
+            { y: acc, name: "Correct" },
+            { y: rem, name: "Incorrect" }
+          ]
+        }]
+      }); 
+      chart.render();
+    },error=>{
+      console.log('error')
+    })
+    
   }
 
   getHistory(){
