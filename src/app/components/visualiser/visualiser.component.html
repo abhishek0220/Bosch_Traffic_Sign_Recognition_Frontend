@@ -1,7 +1,11 @@
 <div class="container valign-wrapper" style="height:100%">
-    <div style="width: 60%; margin: auto;">
+    <div style="width: 60vh; margin: auto; height: 70vh; position: relative;" >
         <img src="{{imgLink}}" width="100%">
-        <div style="text-align: center;">
+        <div *ngIf="imgLink == ''" class="valign-wrapper" style="position: absolute; width: 100%; height: 100%; top: 0;">
+          <mat-spinner style="margin: auto;"></mat-spinner>
+        </div>
+
+        <div style="text-align: center; position: absolute; bottom: 0; width: 100%;">
             <mat-form-field appearance="fill" style="width: 50%;">
               <mat-label>Select class</mat-label>
               <mat-select [(value)]="selected">
@@ -9,6 +13,6 @@
               </mat-select>
             </mat-form-field>
             <a class="btn" style="margin-left: 30px;" (click)="getGrid()">Send Image</a>
-          </div>
+        </div>
     </div>
 </div>

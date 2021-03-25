@@ -16,6 +16,7 @@ import { ImageCropperModule } from 'ngx-image-cropper';
 import { MetricsComponent } from './components/metrics/metrics.component';
 import { VisualiserComponent } from './components/visualiser/visualiser.component';
 import { MisclassifiedComponent } from './components/misclassified/misclassified.component';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { MisclassifiedComponent } from './components/misclassified/misclassified
     FormsModule,
     MatSelectModule,
     MatSliderModule,
+    MatProgressSpinnerModule,
     ReactiveFormsModule,
     ImageCropperModule,
     HttpClientModule
