@@ -8,8 +8,9 @@
     <div class="row" style="width: 100%;">
         <div class="col s6 row" *ngFor="let img of imgLinks">
             <div class="col s8" style="margin: 0; padding: 0;">
-                <img src="{{img['imgLink']}}" width="100%">
+                <img src="{{img['imgLink']}}" width="100%" (click)="getImg(img['predicted_label'], img['ImageLoc'])">
             </div>
+
             <div class="col s4" style="margin: 0;">
                 <h4>Predicted Class : <b>{{img['predicted_label']}}</b></h4>
                 <h4>Correct Class : <b>{{img['correct_label']}}</b></h4>
@@ -27,5 +28,13 @@
           </mat-select>
         </mat-form-field>
         <a class="btn" style="margin-left: 30px;" (click)="getImgs()" >Get Images</a>
+    </div>
+</div>
+<div *ngIf="show" class="valign-wrapper" style="position: fixed; z-index: 10; top:0; width: 100%; height: 100%;" >
+    
+    <div style="margin: auto;">
+        <div><a (click)="close()">Close</a></div>
+      <img src="{{imgA}}" height="400px" width="400px"  alt="" srcset="">
+      <img src="{{imgB}}" height="400px" width="400px"  alt="" srcset="">
     </div>
 </div>

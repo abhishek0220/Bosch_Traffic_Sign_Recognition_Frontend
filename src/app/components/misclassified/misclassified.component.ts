@@ -13,6 +13,9 @@ export class MisclassifiedComponent implements OnInit {
   serverURL: string;
   selected = '1';
   imgLinks = [];
+  imgA = "";
+  imgB = "";
+  show = false;
 
   constructor(
     private http: HttpClient,
@@ -41,6 +44,22 @@ export class MisclassifiedComponent implements OnInit {
     },error=>{
       console.log('error')
     })
+  }
+  getImg(a : any, path :any){
+    this.http.post(this.serverURL + '/compareSIFT', {
+      'path':path,
+      'per' : a
+    }).subscribe((response : any) => {
+      console.log(response)
+      this.imgA = response['img1'];
+      this.imgB = response['img2'];
+      this.show = true;
+    },error=>{
+      console.log('error')
+    })
+  }
+  close(){
+    this.show = false;
   }
 
 }
