@@ -15,13 +15,15 @@ import { MatSelectModule } from '@angular/material/select';
 import { ImageCropperModule } from 'ngx-image-cropper';
 import { MetricsComponent } from './components/metrics/metrics.component';
 import { VisualiserComponent } from './components/visualiser/visualiser.component';
+import { MisclassifiedComponent } from './components/misclassified/misclassified.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     AddImageComponent,
     MetricsComponent,
-    VisualiserComponent
+    VisualiserComponent,
+    MisclassifiedComponent
   ],
   imports: [
     BrowserModule,
