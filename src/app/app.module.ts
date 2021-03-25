@@ -19,6 +19,7 @@ import { MisclassifiedComponent } from './components/misclassified/misclassified
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { ReportComponent } from './components/report/report.component';
 import { HomeComponent } from './components/home/home.component';
+import { TrainComponent } from './components/train/train.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { HomeComponent } from './components/home/home.component';
     MisclassifiedComponent,
     ReportComponent,
     HomeComponent,
+    TrainComponent,
   ],
   imports: [
     BrowserModule,

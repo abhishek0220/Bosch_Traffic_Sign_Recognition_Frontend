@@ -5,6 +5,7 @@ import { HomeComponent } from './components/home/home.component';
 import { MetricsComponent } from './components/metrics/metrics.component';
 import { MisclassifiedComponent } from './components/misclassified/misclassified.component';
 import { ReportComponent } from './components/report/report.component';
+import { TrainComponent } from './components/train/train.component';
 import { VisualiserComponent } from './components/visualiser/visualiser.component';
 
 const routes: Routes = [
@@ -31,6 +32,10 @@ const routes: Routes = [
   {
     path:'report',
     component: ReportComponent
+  },
+  {
+    path:'train',
+    component: TrainComponent
   },
 ];
 

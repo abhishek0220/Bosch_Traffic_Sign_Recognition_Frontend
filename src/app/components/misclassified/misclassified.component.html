@@ -13,9 +13,9 @@
             <div class="col s4" style="margin: 0;">
                 <h4>Predicted Class : <b>{{img['predicted_label']}}</b></h4>
                 <h4>Correct Class : <b>{{img['correct_label']}}</b></h4>
-                <h4>Brightness : <b>{{img['brightness']}}</b></h4>
-                <h4>Contrast : <b>{{img['contrast']}}</b></h4>
-                <h4>Sharpness : <b>{{img['sharpness']}}</b></h4>
+                <h4 class="{{img['b_color']}}-text">Brightness : <b>{{img['brightness']}}</b></h4>
+                <h4 class="{{img['c_color']}}-text">Contrast : <b>{{img['contrast']}}</b></h4>
+                <h4 class="{{img['s_color']}}-text">Sharpness : <b>{{img['sharpness']}}</b></h4>
             </div>
         </div>
     </div>
@@ -26,6 +26,6 @@
             <mat-option  *ngFor="let item of classes; let i = index" value="{{i+1}}">{{i+1}}. {{item}}</mat-option>
           </mat-select>
         </mat-form-field>
-        <a class="btn" style="margin-left: 30px;" (click)="getImgs()" >Send Image</a>
+        <a class="btn" style="margin-left: 30px;" (click)="getImgs()" >Get Images</a>
     </div>
 </div>
