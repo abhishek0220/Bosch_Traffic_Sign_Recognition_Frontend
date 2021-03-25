@@ -20,7 +20,7 @@ export class MetricsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.makeGraph('/graphPCF', 'graphPCF')
+    //this.makeGraph('/graphPCF', 'graphPCF')
     //this.makeGraph('/graphPCF', 'graph2')
     this.getHistory();
   }

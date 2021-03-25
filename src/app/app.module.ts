@@ -17,6 +17,7 @@ import { MetricsComponent } from './components/metrics/metrics.component';
 import { VisualiserComponent } from './components/visualiser/visualiser.component';
 import { MisclassifiedComponent } from './components/misclassified/misclassified.component';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { ReportComponent } from './components/report/report.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
     AddImageComponent,
     MetricsComponent,
     VisualiserComponent,
-    MisclassifiedComponent
+    MisclassifiedComponent,
+    ReportComponent,
   ],
   imports: [
     BrowserModule,
