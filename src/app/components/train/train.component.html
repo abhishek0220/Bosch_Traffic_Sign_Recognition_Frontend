@@ -3,7 +3,7 @@
 </div>
 
 <div class="valign-wrapper" style="position: fixed; right: 30px; top: 30px; width: 200px; height: 100px;">
-    <h3 style="margin: 0;">Training Status: &nbsp;&nbsp;</h3> <div class="grey" style="height: 20px; width: 20px; border-radius: 50%;"></div>
+    <h3 style="margin: 0;">Training Status: &nbsp;&nbsp;</h3> <div class="{{scolor}}" style="height: 20px; width: 20px; border-radius: 50%;"></div>
 </div>
 <div class="container valign-wrapper" style="height: 100vh; text-align: center;">
     <div style="margin: auto;">
@@ -29,7 +29,7 @@
                 </mat-form-field>
             </div>
         </div>
-        <a class="btn-large green" (click)="trainModel()">Train Model</a>
+        <button class="btn-large green" (click)="trainModel()" [disabled]="modelRun">Train Model</button>
     </div>
     
 </div>
