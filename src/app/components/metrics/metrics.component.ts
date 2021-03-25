@@ -21,9 +21,82 @@ export class MetricsComponent implements OnInit {
 
   ngOnInit(): void {
     this.makeGraph('/graphPCF', 'graphPCF')
-    this.makeGraph('/graphPCF', 'graph2')
+    //this.makeGraph('/graphPCF', 'graph2')
+    this.getHistory();
   }
 
+  getHistory(){
+    this.http.get(this.serverURL + '/static/history.json').subscribe((response : any)=>{
+      var loss = [];
+      var acc = [];
+      var vloss = [];
+      var vacc = [];
+      for(var i in response['loss']){
+        loss.push({x:parseInt(i)+1, y:response['loss'][i]})
+        console.log()
+      }
+      for(var i in response['accuracy']){
+        acc.push({x:parseInt(i)+1, y:response['accuracy'][i]})
+      }
+      for(var i in response['val_loss']){
+        vloss.push({x:parseInt(i)+1, y:response['val_loss'][i]})
+      }
+      for(var i in response['val_accuracy']){
+        vacc.push({x:parseInt(i)+1, y:response['val_accuracy'][i]})
+      }
+      this.history(loss, acc, vloss, vacc);
+
+    },error=>{
+      console.log('error')
+    })
+  }
+
+  async history(loss : {x:any ,y:any}[], acc : {x:any ,y:any}[], vloss : {x:any ,y:any}[], vacc : {x:any ,y:any}[]){
+    let chart = new CanvasJS.Chart("graph2", {
+      animationEnabled: true,
+      title:{
+        text: "History"
+      },
+      axisX: {
+        title: "No of Epoch",
+      },
+      axisY: {
+        maximum: 1,
+      },
+      legend:{
+        cursor: "pointer",
+        fontSize: 16
+      },
+      toolTip:{
+        shared: true
+      },
+      data: [{
+        name: "loss",
+        type: "spline",
+        showInLegend: true,
+        dataPoints: loss
+      },
+      {
+        name: "accuracy",
+        type: "spline",
+        showInLegend: true,
+        dataPoints: acc
+      },
+      {
+        name: "val_loss",
+        type: "spline",
+        showInLegend: true,
+        dataPoints: vloss
+      },
+      {
+        name: "val_accuracy",
+        type: "spline",
+        showInLegend: true,
+        dataPoints: vacc
+      },]
+    });
+    chart.render();
+  }
   async makeGraph(endpoint: string, canvasID : string){
     this.http.get(this.serverURL + endpoint).subscribe((response : any)=>{
       let chart = new CanvasJS.Chart(canvasID, {
