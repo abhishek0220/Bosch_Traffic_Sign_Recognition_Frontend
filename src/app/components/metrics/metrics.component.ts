@@ -24,6 +24,7 @@ export class MetricsComponent implements OnInit {
     //this.makeGraph('/graphPCF', 'graph2')
     this.getHistory();
     this.makeAccGraph();
+    this.makeTestAccGraph();
   }
   makeAccGraph(){
     this.http.get(this.serverURL + '/static/accuracy.json').subscribe((response : any)=>{
@@ -35,6 +36,34 @@ export class MetricsComponent implements OnInit {
         exportEnabled: true,
         title:{
           text: "Accuracy"
+        },
+        data: [{
+          type: "pie",
+          showInLegend: true,
+          toolTipContent: "<b>{name}</b>: {y} (#percent%)",
+          indexLabel: "{name} - #percent%",
+          dataPoints: [
+            { y: acc, name: "Correct" },
+            { y: rem, name: "Incorrect" }
+          ]
+        }]
+      }); 
+      chart.render();
+    },error=>{
+      console.log('error')
+    })
+    
+  }
+  makeTestAccGraph(){
+    this.http.get(this.serverURL + '/static/test_accuracy.json').subscribe((response : any)=>{
+      var acc = parseFloat(response['accuracy']);
+      var rem = 1 - acc;
+      let chart = new CanvasJS.Chart("graphTestAcc", {
+        theme: "light2",
+        animationEnabled: true,
+        exportEnabled: true,
+        title:{
+          text: "Test Accuracy"
         },
         data: [{
           type: "pie",
